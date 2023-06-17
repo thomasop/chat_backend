@@ -8,16 +8,17 @@ import dotenv from "dotenv";
 import conversationRouter from "./routes/Conversation.js";
 import messageRouter from "./routes/Message.js";
 import userRouter from "./routes/User.js";
+import compression from 'compression';
+import helmet from "helmet";
+import RateLimit from 'express-rate-limit';
 dotenv.config();
 let app = express();
 export const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
         methods: ["GET", "POST"],
     },
 });
-console.log(app.get('env'));
 let users = {};
 io.on("connection", (socket) => {
     console.log("user connection");
@@ -41,9 +42,16 @@ io.on("connection", (socket) => {
         console.log("user disconnect");
     });
 });
+const limiter = RateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 20,
+});
+app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(compression());
+app.use(helmet());
+app.use(cors({ credentials: true }));
 app.use(cookieParser(process.env.SECRET_COOKIE));
 app.use("/user", userRouter);
 app.use("/conversation", conversationRouter);
