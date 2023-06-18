@@ -1,13 +1,13 @@
-import express from "express";
+import express, { Response, Request} from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import conversationRouter from "./routes/Conversation.js";
-import messageRouter from "./routes/Message.js";
-import userRouter from "./routes/User.js";
+import conversationRouter from "./routes/Conversation";
+import messageRouter from "./routes/Message";
+import userRouter from "./routes/User";
 import compression from 'compression'
 import helmet from "helmet"
 import RateLimit from 'express-rate-limit'
@@ -19,6 +19,7 @@ export const server = createServer(app);
  const io = new Server(server, {
   cors: {
     methods: ["GET", "POST"],
+    origin: "http://localhost:3000",
   },
   
 });
@@ -55,9 +56,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(compression());
 app.use(helmet());
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cookieParser(process.env.SECRET_COOKIE));
-
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).json({
+    msg: "API is up",
+    data: null,
+  });
+});
 app.use("/user", userRouter);
 app.use("/conversation", conversationRouter);
 app.use("/message", messageRouter);

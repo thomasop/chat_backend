@@ -1,5 +1,4 @@
-import { QueryTypes } from "sequelize";
-import connect from "../database/connect.js";
+import connect from "../database/connect";
 import { DataType } from "sequelize-typescript";
 
 const User = connect.define(

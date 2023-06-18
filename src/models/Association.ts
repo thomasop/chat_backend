@@ -1,6 +1,6 @@
-import Message from "./Message.js";
-import User from "./User.js";
-import Conversation from "./Conversation.js";
+import Message from "./Message";
+import User from "./User";
+import Conversation from "./Conversation";
 
 Conversation.hasOne(Message, {
   foreignKey: "conversationId",

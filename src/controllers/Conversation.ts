@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { Conversation, Message, User } from "../models/Association.js";
-import connect from "../database/connect.js";
+import { Conversation, Message, User } from "../models/Association";
 import { Op, QueryTypes } from "sequelize";
 import { validationResult } from "express-validator";
 

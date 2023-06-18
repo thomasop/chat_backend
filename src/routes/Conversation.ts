@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import auth from "../middleware/auth.js";
-import { Add, All } from "../controllers/Conversation.js";
+import auth from "../middleware/auth";
+import { Add, All } from "../controllers/Conversation";
 import { body } from "express-validator";
 
 const conversationRouter = express.Router();

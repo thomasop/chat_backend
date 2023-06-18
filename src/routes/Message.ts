@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
-import auth from "../middleware/auth.js";
+import auth from "../middleware/auth";
 import { body } from "express-validator";
-import { All, Add, Edit } from "../controllers/Message.js";
+import { All, Add, Edit } from "../controllers/Message";
 
 const messageRouter = express.Router();
 

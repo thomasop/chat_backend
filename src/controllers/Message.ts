@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Conversation, Message, User } from "../models/Association.js";
+import { Conversation, Message, User } from "../models/Association";
 import { validationResult } from "express-validator";
 
 const Add = async (req: Request, res: Response) => {

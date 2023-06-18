@@ -1,6 +1,5 @@
 import { DataTypes, NOW } from "sequelize";
-import connect from "../database/connect.js";
-import Conversation from "./Conversation.js";
+import connect from "../database/connect";
 
 const Message = connect.define(
   "message",

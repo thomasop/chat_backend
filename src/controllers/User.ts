@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
-import User from "../models/User.js";
+import User from "../models/User";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import cookieParser from "cookie-parser";
 dotenv.config();
 
 const generateAccessToken = (user: string) => {
