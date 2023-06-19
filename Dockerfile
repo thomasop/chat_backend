@@ -10,7 +10,7 @@ COPY package*.json ./
 # ! you need to have built your code at this point
 # installing production dependencies and code
 RUN npm ci --omit=dev
-COPY dist/src/. dist/.
+COPY dist/. dist/.
 
 EXPOSE 8080
 
